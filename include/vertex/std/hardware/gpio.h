@@ -5,21 +5,36 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdbool.h>
 #include <float.h>
 
 // Types for C and C++ style (wrapper without _t)
 
 typedef uint8_t gpio_pin_t;
+
+#ifdef __cplusplus
+namespace vx {
+namespace gpio {
+    enum class state : uint8_t {
+        LOW = 0,
+        HIGH = 1,
+        UNDEF = 2,
+    };
+}
+}
+#else
 typedef uint8_t gpio_state_t;
+#define GPIO_UNDEF  2
+#define GPIO_HIGH   1
+#define GPIO_LOW    0
+#endif
+
 typedef struct gpio_conf gpio_conf_t;   // opaque
 typedef struct adc_conf adc_conf_t;     // opaque
 typedef uint8_t adc_channel_t;
 typedef float adc_value_t;  // [0, 1]
 typedef float pwm_value_t;  // [0, 1]
 
-// !! (except; must be in enum : uint8_t in wrapper)
-#define GPIO_HIGH   1
-#define GPIO_LOW    0
 
 // Functions for C style (called in wrapper)
 
