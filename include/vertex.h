@@ -9,5 +9,6 @@
 #undef _SFY
 #endif
 
+#include "vertex/std/hardware/gpio.h"
 
 #endif // VERTEX_H_
